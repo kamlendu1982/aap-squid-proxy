@@ -1,0 +1,15 @@
+---
+- name: Configure Squid Proxy
+  ansible.builtin.template:
+    src: squid.conf.j2
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Squid
+
+- name: Clear and rebuild cache if needed
+  ansible.builtin.command: squid -z
+  register: cache_status
+  changed_when: "'Rebuilding storage' in cache_status.stdout"
+

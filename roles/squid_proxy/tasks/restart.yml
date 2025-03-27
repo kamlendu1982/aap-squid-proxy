@@ -1,0 +1,7 @@
+---
+- name: Start and Enable Squid Service
+  ansible.builtin.service:
+    name: squid
+    enabled: yes
+    state: started
+

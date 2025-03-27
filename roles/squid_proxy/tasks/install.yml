@@ -1,0 +1,13 @@
+---
+- name: Ensure cache directory exists
+  ansible.builtin.file:
+    path: "{{ cache_dir }}"
+    state: directory
+    owner: squid
+    group: squid
+    mode: '0755'
+
+- name: Install Squid Proxy
+  ansible.builtin.package:
+    name: squid
+    state: present

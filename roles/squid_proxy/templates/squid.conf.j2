@@ -1,0 +1,28 @@
+# Squid Proxy Configuration
+
+http_port 3128
+cache_dir ufs {{ cache_dir }} 100 16 256
+cache_mem {{ cache_mem }}
+
+acl permitted_clients src {{ permitted_clients | default('192.168.1.0/24') }}
+acl whitelist_internal_dom dstdomain {{ whitelist_internal_dom | default('') }}
+acl whitelist_internal_ip dst {{ whitelist_internal_ip | default('') }}
+acl whitelist_external_dom dstdomain {{ whitelist_external_dom | default('') }}
+acl whitelist_external_ip dst {{ whitelist_external_ip | default('') }}
+
+acl Safe_ports port 80 443
+acl SSL_ports port 443
+acl CONNECT method CONNECT
+
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access allow localhost manager
+http_access deny manager
+http_access allow localhost
+http_access deny !permitted_clients
+http_access allow whitelist_internal_dom
+http_access allow whitelist_internal_ip
+http_access allow whitelist_external_dom
+http_access allow whitelist_external_ip
+http_access deny all
+

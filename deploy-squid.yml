@@ -1,0 +1,6 @@
+---
+- name: Deploy Squid Proxy
+  hosts: proxy_servers
+  roles:
+    - squid_proxy
+
