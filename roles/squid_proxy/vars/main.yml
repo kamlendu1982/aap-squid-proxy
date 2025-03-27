@@ -1,0 +1,9 @@
+---
+cache_dir: "/data/cache"
+cache_mem: "512 MB"
+permitted_clients: "192.168.1.0/24"
+whitelist_internal_dom: "internal.example.com"
+whitelist_internal_ip: "192.168.1.10"
+whitelist_external_dom: "external.example.com"
+whitelist_external_ip: "203.0.113.10"
+
